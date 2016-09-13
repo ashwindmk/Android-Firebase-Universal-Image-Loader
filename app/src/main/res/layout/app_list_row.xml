@@ -11,8 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        card_view:cardCornerRadius="2dp"
-        >
+        card_view:cardCornerRadius="2dp">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -25,7 +24,7 @@
                 android:layout_alignParentTop="true"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:minHeight="120dp" />
 
             <ImageView
@@ -40,7 +39,16 @@
                 android:maxHeight="60dp"
                 android:layout_below="@id/app_image"
                 android:layout_alignParentLeft="true"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:id="@+id/call_to_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="3dp"
+                android:layout_below="@id/app_image"/>
 
             <TextView
                 android:id="@+id/title"
@@ -50,18 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/app_logo"
+                android:layout_toLeftOf="@id/call_to_action"
                 android:layout_below="@id/app_image"
                 android:ellipsize="end"
                 android:maxLines="1"/>
-
-            <Button
-                android:id="@+id/call_to_action"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/title"
-                android:layout_weight="1"/>
-            <!-- android:layout_alignParentBottom="true"-->
 
             <TextView
                 android:id="@+id/subtitle"
@@ -71,8 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/call_to_action"
                 android:ellipsize="end"
-                android:maxLines="1"
-                android:layout_weight="1"/>
+                android:maxLines="1"/>
 
         </RelativeLayout>
 

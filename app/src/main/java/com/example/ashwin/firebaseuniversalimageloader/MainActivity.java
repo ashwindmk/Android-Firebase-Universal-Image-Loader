@@ -14,15 +14,12 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<App> appList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,32 +37,24 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new FirebaseRecyclerAdapter<App, AppViewHolder>(App.class, R.layout.app_list_row, AppViewHolder.class, ref) {
             @Override
-            public void populateViewHolder(AppViewHolder avh, App app, int position) {
+            public void populateViewHolder(AppViewHolder avh, App app, final int position) {
                 avh.setTitle(app.getTitle());
                 avh.setSubTitle(app.getSubtitle());
                 avh.setAppLogo(getApplicationContext(), app.getApplogo());
                 avh.setAppImage(getApplicationContext(), app.getAppimage());
                 avh.setCallToActionText(app.getCalltoactiontext());
-                appList.add(app);
-            }
 
+                avh.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        App app = getItem(position);
+                        Toast.makeText(getApplicationContext(), app.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         };
 
         mRecyclerView.setAdapter(mAdapter);
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                App app = appList.get(position);
-                Toast.makeText(getApplicationContext(), app.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                App app = appList.get(position);
-                Toast.makeText(getApplicationContext(), app.getTitle() + ", " + app.getSubtitle() + " is selected!", Toast.LENGTH_SHORT).show();
-            }
-        }));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
