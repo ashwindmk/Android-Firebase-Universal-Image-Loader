@@ -6,8 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 /**
  * Created by ashwin on 12/9/16.
@@ -44,13 +47,23 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewAppImage = (ImageView) mView.findViewById(R.id.app_image);
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-        imageLoader.displayImage(url, imageViewAppImage);
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageForEmptyUri(R.drawable.no_image_available) //display stub image until image is loaded
+                .build();
+
+        imageLoader.displayImage(url, imageViewAppImage, options);
 
     }
 
     public void setCallToActionText(String callToAction) {
         Button buttonCallToActionText = (Button) mView.findViewById(R.id.call_to_action);
-        buttonCallToActionText.setText(callToAction);
+        if( (callToAction != null) && !callToAction.equals(""))
+        {
+            buttonCallToActionText.setText(callToAction);
+        }
     }
 
 }
