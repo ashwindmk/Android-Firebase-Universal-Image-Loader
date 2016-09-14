@@ -6,16 +6,18 @@ package com.example.ashwin.firebaseuniversalimageloader;
 
 public class App {
 
-    private String title, subTitle, callToActionText, appImage, appLogo;
+    private String title, subTitle, callToActionText, appImage, appLogo, packageName;
 
     public App() {
     }
 
-    public App(String title, String subTitle, String callToAction, String appImageUrl, String appLogoUrl) {
+    public App(String title, String subTitle, String callToActionText, String appImageUrl, String appLogoUrl, String packageName) {
         this.title = title;
         this.subTitle = subTitle;
         this.appImage = appImageUrl;
         this.appLogo = appLogoUrl;
+        this.callToActionText = callToActionText;
+        this.packageName = packageName;
     }
 
     public String getTitle() {
@@ -56,6 +58,14 @@ public class App {
 
     public void setApplogo(String appLogoUrl) {
         this.appLogo = appLogoUrl;
+    }
+
+    public String getPackagename() {
+        return packageName;
+    }
+
+    public void setPackagename(String packageName) {
+        this.packageName = packageName;
     }
 
 }
